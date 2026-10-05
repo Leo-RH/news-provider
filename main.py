@@ -16,8 +16,9 @@ Endpoints
     ?refresh=true            bypass the cache and re-scrape now
 """
 
-import json
+import glob
 import logging
+import os
 
 from flask import Flask, jsonify, request
 
@@ -25,14 +26,16 @@ from Reader import Reader
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
-
-def import_providers(path="providers.json"):
-    with open(path, "r", encoding="utf-8") as file:
-        data = json.load(file)
-    return [p["file"] for p in data.get("providers", [])]
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONNECTORS_DIR = os.environ.get("CONNECTORS_DIR") or os.path.join(BASE_DIR, "connectors")
 
 
-reader = Reader(import_providers())
+def discover_connectors(directory=CONNECTORS_DIR):
+    """Load every *.json file found in the connectors directory."""
+    return sorted(glob.glob(os.path.join(directory, "*.json")))
+
+
+reader = Reader(discover_connectors())
 app = Flask(__name__)
 
 

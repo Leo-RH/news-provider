@@ -2,8 +2,8 @@
 
 A **connector** is a single JSON file that teaches the engine how to read one
 website. You never touch Python — you only describe *where* the news is and
-*how* to pull each piece out of the page. Drop the file next to the others,
-register it in `providers.json`, restart the API, and it works.
+*how* to pull each piece out of the page. Drop the file into the `connectors/`
+directory, restart the API, and it works.
 
 ---
 
@@ -104,21 +104,22 @@ right-click the node → *Copy → Copy selector* for a starting point.
 
 ---
 
-## Registering the connector
+## Installing the connector
 
-Add an entry to `providers.json`:
+Save your JSON file in the `connectors/` directory — any file name ending in
+`.json` is picked up automatically. There is no registry to edit.
 
-```json
-{
-  "providers": [
-    { "id": 4, "file": "myNewConnector.json", "version": "v1.0", "creator": "you" }
-  ]
-}
+```
+connectors/
+└── myNewConnector.json
 ```
 
 Restart the API (`python main.py`). Check it loaded at
 `http://127.0.0.1:5000/sources`, then see its articles at
 `http://127.0.0.1:5000/news?source=mynew`.
+
+> Want the connectors to live elsewhere? Point the engine at another folder with
+> the `CONNECTORS_DIR` environment variable.
 
 ---
 
