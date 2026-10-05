@@ -1,0 +1,22 @@
+# Version control & project meta
+.git
+.gitignore
+.claude
+*.md
+LICENSE
+
+# Python caches / envs
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# The browser test UI is not needed to run the API
+html_test/
+
+# Local editor / OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

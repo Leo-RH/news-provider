@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News Feed</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="site-title">News Feed</h1>
+      <p class="site-subtitle">Latest articles from your provider</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="status" class="status" role="status">Loading articles…</div>
+    <section id="feed" class="feed" aria-label="Articles"></section>
+  </main>
+
+  <!-- Modal for full article -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close" type="button" data-close aria-label="Close">&times;</button>
+      <div class="modal__body">
+        <div id="modal-media" class="modal__media"></div>
+        <span id="modal-topic" class="pill__topic modal__topic"></span>
+        <h2 id="modal-title" class="modal__title"></h2>
+        <time id="modal-date" class="modal__date"></time>
+        <p id="modal-description" class="modal__description"></p>
+        <a id="modal-link" class="btn" href="#" target="_blank" rel="noopener noreferrer">Read full article</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

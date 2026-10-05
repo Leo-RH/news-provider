@@ -1,0 +1,23 @@
+{
+  "name": "IGN Brasil - PS5",
+  "source": "https://br.ign.com",
+  "paths": [
+    "/ps5"
+  ],
+  "splitter": {
+    "selector": "article.article"
+  },
+  "patterns": {
+    "title": {
+      "selector": "span.caption"
+    },
+    "link": {
+      "selector": "a",
+      "attribute": "href"
+    },
+    "image": {
+      "selector": "img.thumb",
+      "attribute": ["data-src", "src"]
+    }
+  }
+}

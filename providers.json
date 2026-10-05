@@ -1,0 +1,22 @@
+{
+  "providers": [
+    {
+      "id": 1,
+      "file": "theHackerNewsConnector.json",
+      "version": "v1.0",
+      "creator": "lrh"
+    },
+    {
+      "id": 2,
+      "file": "teste.json",
+      "version": "v1.0",
+      "creator": "lrh"
+    },
+    {
+      "id": 3,
+      "file": "FlowGamesConnector.json",
+      "version": "v1.0",
+      "creator": "lrh"
+    }
+  ]
+}

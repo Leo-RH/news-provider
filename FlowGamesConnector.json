@@ -1,0 +1,29 @@
+{
+  "name": "Flow Games",
+  "source": "https://flowgames.gg",
+  "paths": [
+    "/"
+  ],
+  "splitter": {
+    "selector": "div.content"
+  },
+  "patterns": {
+    "title": {
+      "selector": "a.title-link"
+    },
+    "link": {
+      "selector": "a.title-link",
+      "attribute": "href"
+    },
+    "date": {
+      "selector": "span.data"
+    },
+    "topic": {
+      "selector": "a.tag"
+    },
+    "image": {
+      "selector": "div.content-image img",
+      "attribute": ["data-src", "srcset", "src"]
+    }
+  }
+}

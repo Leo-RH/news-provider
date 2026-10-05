@@ -1,0 +1,35 @@
+{
+  "name": "The Hacker News",
+  "source": "https://thehackernews.com",
+  "paths": [
+    "/search/label/Threat%20Intelligence",
+    "/search/label/Vulnerability",
+    "/search/label/Cyber%20Attack",
+    "/"
+  ],
+  "splitter": {
+    "selector": "div.body-post.clear"
+  },
+  "patterns": {
+    "title": {
+      "selector": "h2.home-title"
+    },
+    "description": {
+      "selector": "div.home-desc"
+    },
+    "date": {
+      "selector": "span.h-datetime"
+    },
+    "link": {
+      "selector": "a.story-link",
+      "attribute": "href"
+    },
+    "topic": {
+      "selector": "span.h-tags"
+    },
+    "image": {
+      "selector": "img.home-img-src",
+      "attribute": ["data-src", "src"]
+    }
+  }
+}
