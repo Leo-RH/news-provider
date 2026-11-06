@@ -167,7 +167,17 @@ The suite runs fully offline against small inline fixtures.
 ### Optional test UI
 
 With the API running, open `html_test/index.html` in a browser to see the feed
-rendered as cards with working links and images.
+rendered as cards with working links and images, each tagged with its category
+and publication date.
+
+## AI assistance
+
+This project was developed with the assistance of
+[Claude](https://www.anthropic.com/claude), Anthropic's AI model, using
+[Claude Code](https://claude.com/claude-code). Claude helped design and write
+the engine upgrade, the test suite, the documentation and the connectors. All
+changes were reviewed and tested by the maintainer, and commits Claude
+contributed to carry a `Co-Authored-By: Claude` trailer.
 
 ## License
 

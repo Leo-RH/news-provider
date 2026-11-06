@@ -42,6 +42,49 @@
     return buildPlaceholder();
   }
 
+  // Category (connector folder) and topic badges, shared by pill and modal.
+  function buildTags(article) {
+    var tags = document.createElement("div");
+    tags.className = "pill__tags";
+    if (article.category) {
+      var category = document.createElement("span");
+      category.className = "pill__category";
+      category.textContent = article.category;
+      tags.appendChild(category);
+    }
+    if (article.topic) {
+      var topic = document.createElement("span");
+      topic.className = "pill__topic";
+      topic.textContent = article.topic;
+      tags.appendChild(topic);
+    }
+    return tags;
+  }
+
+  // `published` is ISO 8601 UTC; show it in the reader's locale. A value at
+  // exactly midnight UTC means the site only gave a day, so show just the day
+  // (in UTC, or it would slip to the previous day west of Greenwich). Falls
+  // back to the raw `date` text when the engine couldn't parse it.
+  function formatPublished(article) {
+    if (!article.published) return article.date || "";
+    var when = new Date(article.published);
+    if (isNaN(when.getTime())) return article.date || "";
+    if (/T00:00:00Z$/.test(article.published)) {
+      return when.toLocaleDateString(undefined, { dateStyle: "medium", timeZone: "UTC" });
+    }
+    return when.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+  }
+
+  function fillDate(el, article) {
+    var text = formatPublished(article);
+    el.textContent = text;
+    el.style.display = text ? "" : "none";
+    if (article.published) el.setAttribute("datetime", article.published);
+    else el.removeAttribute("datetime");
+    // Hovering shows the date exactly as the site printed it.
+    el.title = article.date && article.date !== text ? "Source: " + article.date : "";
+  }
+
   function buildPlaceholder() {
     var ph = document.createElement("div");
     ph.className = "media-placeholder";
@@ -71,12 +114,8 @@
     var body = document.createElement("div");
     body.className = "pill__body";
 
-    if (article.topic) {
-      var topic = document.createElement("span");
-      topic.className = "pill__topic";
-      topic.textContent = article.topic;
-      body.appendChild(topic);
-    }
+    var tags = buildTags(article);
+    if (tags.childNodes.length) body.appendChild(tags);
 
     var title = document.createElement("h2");
     title.className = "pill__title";
@@ -88,10 +127,10 @@
     desc.textContent = truncate(article.description);
     body.appendChild(desc);
 
-    if (article.date) {
-      var date = document.createElement("span");
+    if (article.published || article.date) {
+      var date = document.createElement("time");
       date.className = "pill__date";
-      date.textContent = article.date;
+      fillDate(date, article);
       body.appendChild(date);
     }
 
@@ -129,15 +168,15 @@
     mediaWrap.innerHTML = "";
     mediaWrap.appendChild(buildImage(article.image, article.title, "modal__image"));
 
-    var topicEl = document.getElementById("modal-topic");
-    topicEl.textContent = article.topic || "";
-    topicEl.style.display = article.topic ? "" : "none";
+    var tagsEl = document.getElementById("modal-tags");
+    tagsEl.innerHTML = "";
+    var tags = buildTags(article);
+    while (tags.firstChild) tagsEl.appendChild(tags.firstChild);
+    tagsEl.style.display = tagsEl.childNodes.length ? "" : "none";
 
     document.getElementById("modal-title").textContent = article.title || "Untitled";
 
-    var dateEl = document.getElementById("modal-date");
-    dateEl.textContent = article.date || "";
-    dateEl.style.display = article.date ? "" : "none";
+    fillDate(document.getElementById("modal-date"), article);
 
     document.getElementById("modal-description").textContent = article.description || "";
 

@@ -115,6 +115,24 @@ body {
   flex: 1;
 }
 
+.pill__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pill__category {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: rgba(108, 140, 255, 0.12);
+  border: 1px solid rgba(108, 140, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
 .pill__topic {
   align-self: flex-start;
   font-size: 0.72rem;
@@ -219,7 +237,7 @@ body {
   gap: 14px;
 }
 
-.modal__topic {
+.modal__tags {
   margin-top: 4px;
 }
 
